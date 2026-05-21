@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FilterSidebar from "@/components/FilterSidebar";
 import MobileFilterDrawer from "@/components/MobileFilterDrawer";
 import InternshipCard, { Internship } from "@/components/InternshipCard";
@@ -11,66 +11,36 @@ import EmptyState from "@/components/EmptyState";
 import Pagination from "@/components/Pagination";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Mock Data
-const MOCK_INTERNSHIPS: Internship[] = [
-  {
-    id: "1",
-    role: "Frontend Engineering Intern",
-    company: "Linear",
-    logoInitial: "L",
-    location: "Remote",
-    workMode: "Remote",
-    stipend: "₹30,000 /month",
-    duration: "6 Months",
-    type: "Internship",
-    activelyHiring: true,
-    postedAgo: "2 days ago",
-  },
-  {
-    id: "2",
-    role: "Product Design Intern",
-    company: "Stripe",
-    logoInitial: "S",
-    location: "Bangalore",
-    workMode: "Hybrid",
-    stipend: "₹45,000 /month",
-    duration: "3 Months",
-    type: "Internship",
-    activelyHiring: false,
-    postedAgo: "1 week ago",
-  },
-  {
-    id: "3",
-    role: "Full Stack Developer",
-    company: "Vercel",
-    logoInitial: "V",
-    location: "Remote",
-    workMode: "Remote",
-    stipend: "₹50,000 /month",
-    duration: "6 Months",
-    type: "Internship with Job Offer",
-    activelyHiring: true,
-    postedAgo: "Just now",
-  },
-  {
-    id: "4",
-    role: "Marketing Analytics Intern",
-    company: "Notion",
-    logoInitial: "N",
-    location: "Delhi NCR",
-    workMode: "On-site",
-    stipend: "₹25,000 /month",
-    duration: "2 Months",
-    type: "Internship",
-    activelyHiring: false,
-    postedAgo: "3 days ago",
-  },
-];
-
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [internships, setInternships] = useState<Internship[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    async function fetchInternships() {
+      try {
+        setIsLoading(true);
+        const res = await fetch("/api/internships");
+        const json = await res.json();
+        if (json.success && json.data) {
+          setInternships(json.data);
+          setIsEmpty(json.data.length === 0);
+        } else {
+          throw new Error(json.error || "Failed to load data");
+        }
+      } catch (err: any) {
+        console.error(err);
+        setError("Failed to fetch internships. Showing mock data instead.");
+        setIsEmpty(true);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    fetchInternships();
+  }, []);
 
   // Filter State
   const [activeFilters, setActiveFilters] = useState<string[]>(["Remote"]);
