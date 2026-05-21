@@ -12,7 +12,7 @@ export default function HeroSection() {
     },
   };
 
-  const itemVariants = {
+  const itemVariants: import("framer-motion").Variants = {
     hidden: { opacity: 0, y: 15 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
@@ -68,13 +68,13 @@ export default function HeroSection() {
             { label: "Product Design", icon: Palette },
             { label: "Marketing", icon: Megaphone },
             { label: "Remote", icon: MapPin },
-          ].map((tag) => (
+          ].map(({ label, icon: Icon }) => (
             <button
-              key={tag.label}
+              key={label}
               className="flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-border/60 bg-muted/5 text-sm font-medium text-foreground hover:bg-primary/5 hover:border-primary/30 hover:text-primary transition-colors"
             >
-              <tag.icon className="h-3.5 w-3.5" />
-              {tag.label}
+              <Icon className="h-3.5 w-3.5" />
+              {label}
             </button>
           ))}
         </motion.div>

@@ -16,7 +16,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEmpty, setIsEmpty] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     async function fetchInternships() {
@@ -30,9 +29,8 @@ export default function Home() {
         } else {
           throw new Error(json.error || "Failed to load data");
         }
-      } catch (err: any) {
+      } catch (err: unknown) {
         console.error(err);
-        setError("Failed to fetch internships. Showing mock data instead.");
         setIsEmpty(true);
       } finally {
         setIsLoading(false);

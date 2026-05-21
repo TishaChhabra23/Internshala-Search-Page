@@ -26,7 +26,7 @@ export default function EmptyState() {
       
       <h3 className="text-2xl font-bold text-foreground mb-3 tracking-tight relative z-10">No internships found</h3>
       <p className="text-muted max-w-sm mb-10 text-[15px] leading-relaxed relative z-10 font-medium">
-        We couldn't find any opportunities matching your exact filters. Try broadening your search criteria.
+        We couldn&apos;t find any opportunities matching your exact filters. Try broadening your search criteria.
       </p>
       
       <button className="px-8 py-3.5 bg-foreground text-white font-semibold rounded-xl hover:bg-foreground/90 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 relative z-10">

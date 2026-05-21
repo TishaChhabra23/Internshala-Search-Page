@@ -9,8 +9,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Internshala Search | Premium",
-  description: "A premium modern internship search platform.",
+  title: "Internship Search Platform",
+  description: "A premium modern internship search platform built with NextJS and React.",
+  openGraph: {
+    title: "Internship Search Platform",
+    description: "A premium modern internship search platform built with NextJS and React.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

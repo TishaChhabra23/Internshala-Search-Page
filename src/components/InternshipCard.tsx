@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Building2, Calendar, MapPin, PlayCircle, Wallet, Bookmark, ArrowUpRight, Laptop } from "lucide-react";
+import { Building2, Calendar, MapPin, PlayCircle, Wallet, Bookmark, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 

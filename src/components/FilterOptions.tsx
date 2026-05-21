@@ -72,6 +72,12 @@ export default function FilterOptions({
                           )}>
                             {activeFilters.includes(profile) && <X className="h-3.5 w-3.5" />}
                           </div>
+                          <input 
+                            type="checkbox" 
+                            className="sr-only" 
+                            checked={activeFilters.includes(profile)} 
+                            onChange={() => toggleFilter(profile)} 
+                          />
                           <span className="text-sm text-foreground/90 font-medium">{profile}</span>
                         </label>
                       ))}
@@ -120,6 +126,12 @@ export default function FilterOptions({
                           )}>
                             {activeFilters.includes(location) && <X className="h-3.5 w-3.5" />}
                           </div>
+                          <input 
+                            type="checkbox" 
+                            className="sr-only" 
+                            checked={activeFilters.includes(location)} 
+                            onChange={() => toggleFilter(location)} 
+                          />
                           <span className="text-sm text-foreground/90 font-medium">{location}</span>
                         </label>
                       ))}
