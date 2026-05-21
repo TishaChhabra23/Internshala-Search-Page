@@ -71,24 +71,55 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
 
-  // Mock toggle for testing states
-  // useEffect(() => {
-  //   setTimeout(() => setIsLoading(false), 2000);
-  // }, []);
+  // Filter State
+  const [activeFilters, setActiveFilters] = useState<string[]>(["Remote"]);
+  const [wfh, setWfh] = useState(false);
+  const [partTime, setPartTime] = useState(false);
+  const [stipendValue, setStipendValue] = useState(0);
+
+  const toggleFilter = (filter: string) => {
+    setActiveFilters((prev) => 
+      prev.includes(filter) ? prev.filter(f => f !== filter) : [...prev, filter]
+    );
+  };
+
+  const clearAll = () => {
+    setActiveFilters([]);
+    setWfh(false);
+    setPartTime(false);
+    setStipendValue(0);
+  };
+
+  const filterProps = {
+    activeFilters,
+    toggleFilter,
+    wfh,
+    setWfh,
+    partTime,
+    setPartTime,
+    stipendValue,
+    setStipendValue,
+    clearAll
+  };
 
   return (
-    <div className="min-h-screen bg-background relative flex flex-col">
+    <motion.div 
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="min-h-screen bg-background relative flex flex-col"
+    >
       {/* Hero Search Area */}
       <HeroSection />
 
       {/* Mobile Filter Header */}
-      <MobileFilterDrawer />
+      <MobileFilterDrawer {...filterProps} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
         <div className="flex gap-8 items-start">
           
           {/* Desktop Sidebar */}
-          {isLoading ? <FilterSidebarSkeleton /> : <FilterSidebar />}
+          {isLoading ? <FilterSidebarSkeleton /> : <FilterSidebar {...filterProps} />}
           
           {/* Main Content Area */}
           <div className="flex-1 min-w-0">
@@ -149,6 +180,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
