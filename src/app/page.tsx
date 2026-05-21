@@ -70,6 +70,7 @@ const MOCK_INTERNSHIPS: Internship[] = [
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Filter State
   const [activeFilters, setActiveFilters] = useState<string[]>(["Remote"]);
@@ -172,7 +173,14 @@ export default function Home() {
                   ))}
                   
                   {/* Pagination */}
-                  <Pagination />
+                  <Pagination 
+                    currentPage={currentPage}
+                    totalPages={12}
+                    onPageChange={(page) => {
+                      setCurrentPage(page);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
+                  />
                 </motion.div>
               )}
             </AnimatePresence>

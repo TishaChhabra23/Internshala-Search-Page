@@ -122,7 +122,10 @@ export default function InternshipCard({ internship }: { internship: Internship 
           </span>
         </div>
         
-        <button className="w-full sm:w-auto text-sm font-semibold text-white bg-primary hover:bg-primary/90 px-6 py-3 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2">
+        <button 
+          onClick={() => alert(`Successfully applied to the ${internship.role} position at ${internship.company}!`)}
+          className="w-full sm:w-auto text-sm font-semibold text-white bg-primary hover:bg-primary/90 px-6 py-3 rounded-xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        >
           Apply Now
           <ArrowUpRight className="h-4 w-4" />
         </button>
