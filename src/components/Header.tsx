@@ -1,9 +1,7 @@
 "use client";
 
-import { Bell, Bookmark, MessageSquare, Search, User } from "lucide-react";
-import Link from "next/link";
+import { Bell, Bookmark, MessageSquare, User } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function Header() {
@@ -34,18 +32,6 @@ export default function Header() {
             <span className="text-xl font-bold tracking-tight text-foreground">
               internshala
             </span>
-          </div>
-
-          {/* Center Search Bar - Hidden on small screens */}
-          <div className="hidden md:flex items-center relative max-w-md w-full mx-8">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <Search className="h-4 w-4 text-muted" />
-            </div>
-            <input
-              type="text"
-              className="block w-full pl-10 pr-3 py-2 border border-border rounded-full text-sm placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all bg-muted/5"
-              placeholder="Search internships..."
-            />
           </div>
 
           {/* Right Actions */}

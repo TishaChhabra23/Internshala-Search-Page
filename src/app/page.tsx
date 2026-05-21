@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import FilterSidebar from "@/components/FilterSidebar";
 import MobileFilterDrawer from "@/components/MobileFilterDrawer";
 import InternshipCard, { Internship } from "@/components/InternshipCard";
 import SkeletonCard from "@/components/SkeletonCard";
-import { Suspense } from "react";
+import HeroSection from "@/components/HeroSection";
+import EmptyState from "@/components/EmptyState";
+import Pagination from "@/components/Pagination";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Mock Data
 const MOCK_INTERNSHIPS: Internship[] = [
@@ -57,12 +63,23 @@ const MOCK_INTERNSHIPS: Internship[] = [
 ];
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  // Mock toggle for testing states
+  // useEffect(() => {
+  //   setTimeout(() => setIsLoading(false), 2000);
+  // }, []);
+
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative flex flex-col">
+      {/* Hero Search Area */}
+      <HeroSection />
+
       {/* Mobile Filter Header */}
       <MobileFilterDrawer />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
         <div className="flex gap-8 items-start">
           
           {/* Desktop Sidebar */}
@@ -71,12 +88,12 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="flex-1 min-w-0">
             <div className="hidden lg:flex justify-between items-center mb-6">
-              <h1 className="text-xl font-bold text-foreground">
-                124 Internships found
-              </h1>
+              <h2 className="text-lg font-bold text-foreground">
+                {isLoading ? "Searching..." : isEmpty ? "0 Internships" : "124 Internships found"}
+              </h2>
               <div className="flex items-center gap-2 text-sm">
                 <span className="text-muted">Sort by:</span>
-                <select className="font-medium bg-transparent border-none focus:ring-0 cursor-pointer">
+                <select className="font-medium bg-transparent border-none focus:ring-0 cursor-pointer text-foreground">
                   <option>Relevance</option>
                   <option>Most Recent</option>
                   <option>Highest Stipend</option>
@@ -84,23 +101,47 @@ export default function Home() {
               </div>
             </div>
             
-            <div className="flex flex-col gap-5">
-              {MOCK_INTERNSHIPS.map((internship) => (
-                <InternshipCard key={internship.id} internship={internship} />
-              ))}
-              
-              {/* Skeletons to show loading state visual feel */}
-              {/* <SkeletonCard />
-              <SkeletonCard /> */}
-            </div>
+            <AnimatePresence mode="wait">
+              {isLoading ? (
+                <motion.div 
+                  key="loading"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col gap-5"
+                >
+                  <SkeletonCard />
+                  <SkeletonCard />
+                  <SkeletonCard />
+                </motion.div>
+              ) : isEmpty ? (
+                <motion.div
+                  key="empty"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <EmptyState />
+                </motion.div>
+              ) : (
+                <motion.div 
+                  key="list"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="flex flex-col gap-5"
+                >
+                  {MOCK_INTERNSHIPS.map((internship) => (
+                    <InternshipCard key={internship.id} internship={internship} />
+                  ))}
+                  
+                  {/* Pagination */}
+                  <Pagination />
+                </motion.div>
+              )}
+            </AnimatePresence>
             
-            <div className="mt-10 flex justify-center">
-              <button className="px-6 py-2.5 bg-primary/10 text-primary font-medium rounded-full hover:bg-primary/20 transition-colors text-sm">
-                Load more internships
-              </button>
-            </div>
           </div>
-          
         </div>
       </div>
     </div>
