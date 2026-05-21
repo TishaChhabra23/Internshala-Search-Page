@@ -63,3 +63,4 @@ export default function FilterSidebar(props: FilterSidebarProps) {
     </div>
   );
 }
+
