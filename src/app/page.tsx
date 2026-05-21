@@ -5,6 +5,7 @@ import FilterSidebar from "@/components/FilterSidebar";
 import MobileFilterDrawer from "@/components/MobileFilterDrawer";
 import InternshipCard, { Internship } from "@/components/InternshipCard";
 import SkeletonCard from "@/components/SkeletonCard";
+import FilterSidebarSkeleton from "@/components/FilterSidebarSkeleton";
 import HeroSection from "@/components/HeroSection";
 import EmptyState from "@/components/EmptyState";
 import Pagination from "@/components/Pagination";
@@ -87,7 +88,7 @@ export default function Home() {
         <div className="flex gap-8 items-start">
           
           {/* Desktop Sidebar */}
-          <FilterSidebar />
+          {isLoading ? <FilterSidebarSkeleton /> : <FilterSidebar />}
           
           {/* Main Content Area */}
           <div className="flex-1 min-w-0">
