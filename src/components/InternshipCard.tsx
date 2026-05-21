@@ -133,3 +133,5 @@ export default function InternshipCard({ internship }: { internship: Internship 
     </motion.div>
   );
 }
+
+
