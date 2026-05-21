@@ -91,13 +91,13 @@ export default function Home() {
           
           {/* Main Content Area */}
           <div className="flex-1 min-w-0">
-            <div className="hidden lg:flex justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3 lg:gap-0">
               <h2 className="text-lg font-bold text-foreground">
                 {isLoading ? "Searching..." : isEmpty ? "0 Internships" : "124 Internships found"}
               </h2>
-              <div className="flex items-center gap-2 text-sm">
-                <span className="text-muted">Sort by:</span>
-                <select className="font-medium bg-transparent border-none focus:ring-0 cursor-pointer text-foreground">
+              <div className="flex items-center gap-2 text-sm w-full sm:w-auto">
+                <span className="text-muted whitespace-nowrap">Sort by:</span>
+                <select className="font-medium bg-transparent border-none focus:ring-0 cursor-pointer text-foreground w-full sm:w-auto outline-none">
                   <option>Relevance</option>
                   <option>Most Recent</option>
                   <option>Highest Stipend</option>

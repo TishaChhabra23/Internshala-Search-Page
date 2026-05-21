@@ -37,13 +37,11 @@ export default function MobileFilterDrawer() {
 
   return (
     <>
-      <div className="lg:hidden sticky top-[65px] z-40 bg-background/90 backdrop-blur-md border-b border-border py-3 px-4 flex items-center justify-between">
-        <span className="text-sm font-bold text-foreground">
-          Showing 124 internships
-        </span>
+      {/* Floating Action Button for Filters (Mobile) */}
+      <div className="lg:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40">
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 text-sm font-bold text-primary bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/20 transition-colors"
+          className="flex items-center gap-2 text-sm font-bold text-white bg-foreground px-6 py-3.5 rounded-full shadow-lg hover:scale-105 transition-transform active:scale-95"
         >
           <Filter className="h-4 w-4" />
           Filters {(activeFilters.length > 0 || wfh || partTime) && <span className="bg-primary text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] ml-1">{activeFilters.length + (wfh ? 1 : 0) + (partTime ? 1 : 0)}</span>}
@@ -59,7 +57,7 @@ export default function MobileFilterDrawer() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-50 lg:hidden"
+              className="fixed inset-0 bg-foreground/30 backdrop-blur-sm z-[60] lg:hidden"
             />
             
             {/* Drawer */}
@@ -68,7 +66,7 @@ export default function MobileFilterDrawer() {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed inset-x-0 bottom-0 z-50 bg-card rounded-t-3xl shadow-xl lg:hidden h-[85vh] flex flex-col"
+              className="fixed inset-x-0 bottom-0 z-[70] bg-card rounded-t-3xl shadow-2xl lg:hidden h-[90vh] flex flex-col"
             >
               <div className="flex items-center justify-between p-5 border-b border-border/60 flex-shrink-0 bg-card rounded-t-3xl">
                 <h2 className="text-xl font-bold flex items-center gap-2 text-foreground">
