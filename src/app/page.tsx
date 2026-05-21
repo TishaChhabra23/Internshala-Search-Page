@@ -138,8 +138,15 @@ export default function Home() {
                   exit={{ opacity: 0 }}
                   className="flex flex-col gap-5"
                 >
-                  {MOCK_INTERNSHIPS.map((internship) => (
-                    <InternshipCard key={internship.id} internship={internship} />
+                  {internships.map((internship, index) => (
+                    <motion.div 
+                      key={internship.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1, duration: 0.4, ease: "easeOut" }}
+                    >
+                      <InternshipCard internship={internship} />
+                    </motion.div>
                   ))}
                   
                   {/* Pagination */}
